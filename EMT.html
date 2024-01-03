@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="css/style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EMT 系統</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <h1>EMT 系統</h1>
+
+    <div class="container">
+        <div class="left-section">
+            <h2>請選擇受傷部位：</h2>
+            <img src="img/people.jpg" usemap="#bodymap" id="body-image" alt="Human body">
+
+            <map name="bodymap">
+                <area class="body-part" shape="rect" coords="100,35,200,130" onclick="selectInjury('頭部')">
+                <area class="body-part" shape="rect" coords="120,149,195,221" onclick="selectInjury('胸部')">
+                <!-- 其他受傷部位的定義 -->
+            </map>
+        </div>
+        <div class="right-section">
+            <h2>已選擇的受傷部位：</h2>
+            <ul class="injury-list" id="injury-list"></ul>
+            <button onclick="generateReport()">生成報告</button>
+        </div>
+    </div>
+
+    <script src="js/emt.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+ /* 用於設置人物圖像部位的 CSS 樣式 */
+ .body-part {
+     cursor: pointer;
+ }
+
+ .container {
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .left-section,
+ .right-section {
+     width: 48%;
+ }
+
+ @media screen and (max-width: 768px) {
+
+     .left-section,
+     .right-section {
+         width: 100%;
+         margin-bottom: 20px;
+     }
+ }
+
+ .injury-list {
+     list-style: none;
+     padding: 0;
+ }
+
+ .injury-list li {
+     margin-bottom: 5px;
+ }
+
+ button {
+     padding: 8px 16px;
+     background-color: #007bff;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+     margin-bottom: 10px;
+ }
+
+ button:hover {
+     background-color: #0056b3;
+ }
