@@ -1,30 +1,49 @@
-let selectedInjuries = {};
+let selectedInjuries = []; // 将 selectedInjuries 定义为数组而不是对象
 
 function selectInjury(bodyPart) {
-    if (selectedInjuries[bodyPart]) {
-        delete selectedInjuries[bodyPart];
-    } else {
-        selectedInjuries[bodyPart] = true;
-    }
+    const selectBox = document.createElement('select');
+    selectBox.className = 'form-select';
 
-    updateInjuryList();
+    const injuryOptions = ['請選擇傷勢', '撕裂傷', '挫傷', '擦傷']; // 受傷選項
+
+    injuryOptions.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        selectBox.appendChild(optionElement);
+    });
+
+    selectBox.addEventListener('change', function () {
+        const selectedOption = this.value;
+        const foundIndex = selectedInjuries.findIndex(injury => injury.bodyPart === bodyPart);
+
+        if (selectedOption && foundIndex === -1) {
+            selectedInjuries.push({ bodyPart, injury: selectedOption });
+            updateInjuryList();
+        }
+    });
+
+    document.getElementById('injury-list').appendChild(selectBox);
 }
 
 function updateInjuryList() {
     const injuryList = document.getElementById('injury-list');
     injuryList.innerHTML = '';
 
-    for (const bodyPart in selectedInjuries) {
+    selectedInjuries.forEach((item, index) => {
         const listItem = document.createElement('li');
-        listItem.textContent = bodyPart;
-        injuryList.appendChild(listItem);
-    }
-}
+        listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+        listItem.textContent = `${item.bodyPart}: ${item.injury}`;
 
-function generateReport() {
-    console.log("===== 簡易報告 =====");
-    for (const bodyPart in selectedInjuries) {
-        console.log(bodyPart + " 受傷選項：...");
-    }
-    console.log("===================");
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '刪除';
+        deleteButton.className = 'btn btn-danger btn-sm';
+        deleteButton.onclick = function () {
+            selectedInjuries.splice(index, 1);
+            updateInjuryList();
+        };
+
+        listItem.appendChild(deleteButton);
+        injuryList.appendChild(listItem);
+    });
 }
