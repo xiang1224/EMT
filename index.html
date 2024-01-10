@@ -23,18 +23,13 @@
             </div>
         </div>
     </div>
-
     <div class="title">
         <h1 class="text-center mt-3">EMT 系統</h1>
     </div>
-
-
     <div class="container">
-
         <div class="row">
             <h2>患者資訊</h2>
             <div class="col-md-3">
-
                 <form id="dataForm">
                     <div class="mb-3">
                         <label for="physicalAppearance" class="form-label">外表特徵：</label>
@@ -94,6 +89,7 @@
                     <div class="mb-3">
                         <label for="bloodPressure" class="form-label">血壓：</label>
                         <input type="text" class="form-control" id="bloodPressure">
+                        <small id="heightHelp" class="form-text text-muted">請輸入收縮壓（mmHg）</small>
                     </div>
                 </form>
             </div>
@@ -102,6 +98,7 @@
                     <div class="mb-3">
                         <label for="heartRate" class="form-label">心跳：</label>
                         <input type="text" class="form-control" id="heartRate">
+                        <small id="heightHelp" class="form-text text-muted">請輸入心跳（bpm）</small>
                     </div>
                 </form>
             </div>
@@ -110,11 +107,27 @@
                     <div class="mb-3">
                         <label for="bloodOxygen" class="form-label">血氧：</label>
                         <input type="text" class="form-control" id="bloodOxygen">
+                        <small id="heightHelp" class="form-text text-muted">請輸入血氧（SpO2）</small>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <h2>特殊傷勢</h2>
+            <select class="form-select" id="specialInjuries">
+                <option value="無">無</option>
+                <option value="全身性燒燙傷(1度)">全身性燒燙傷(1度)</option>
+                <option value="全身性燒燙傷(2度)">全身性燒燙傷(2度)</option>
+                <option value="全身性燒燙傷(3度)">全身性燒燙傷(3度)</option>
+                <option value="溺水">溺水</option>
+                <option value="中暑">中暑</option>
+                <option value="低血糖">低血糖</option>
+            </select>
+        </div>
+    </div>
+
 
     <div class="container">
         <div class="row">
@@ -124,50 +137,175 @@
 
                 <map name="bodymap">
                     <!-- 正面 -->
-                    <area class="body-part" shape="circle" coords="159,90,39" alt="頭部" onclick="selectInjury('頭部')">
+                    <area class="body-part" shape="circle" coords="159,90,39" alt="頭部" onclick="openHeadInjuryModal()">
+                    <div class="modal fade" id="HeadinjuryModal" tabindex="-1" aria-labelledby="HeadinjuryModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="HeadinjuryModalLabel">選擇受傷部位</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="injuredArea" class="form-label">選擇受傷部位</label>
+                                        <select class="form-select" id="injuredArea">
+                                            <option value="頭皮">頭皮</option>
+                                            <option value="眼">眼</option>
+                                            <option value="耳">耳</option>
+                                            <option value="鼻">鼻</option>
+                                            <option value="口">口</option>
+                                            <option value="額">額</option>
+                                            <option value="頰">頰</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="injuryType" class="form-label">選擇傷勢</label>
+                                        <select class="form-select" id="injuryType">
+                                            <option value="請選擇傷勢">請選擇傷勢</option>
+                                            <option value="擦傷">擦傷</option>
+                                            <option value="挫傷">挫傷</option>
+                                            <option value="撕裂傷">撕裂傷</option>
+                                            <option value="燙傷">燙傷</option>
+                                            <option value="割傷">割傷</option>
+                                            <option value="拉傷">拉傷</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                                    <button type="button" class="btn btn-primary" onclick="addInjury()"
+                                        data-bs-dismiss="modal">確定</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <area class="body-part" shape="rect" coords="145,132,169,147" alt="前頸" onclick="selectInjury('前頸')">
                     <area class="body-part" shape="rect" coords="117,148,197,226" alt="胸部" onclick="selectInjury('胸部')">
                     <area class="body-part" shape="rect" coords="122,230,191,268" alt="腹部" onclick="selectInjury('腹部')">
                     <area class="body-part" shape="rect" coords="119,270,199,306" alt="私處" onclick="selectInjury('私處')">
-                    <area class="body-part" shape="polygon" coords="117,543 142,556 151,529 145,469 156,311 112,307"
-                        alt="正面-右腿" onclick="selectInjury('正面-右腿')">
+                    <area class="body-part" shape="polygon" coords="116,307 154,312 149,393 120,391" alt="正面-右大腿"
+                        onclick="selectInjury('正面-右大腿')">
+                    <area class="body-part" shape="polygon" coords="146,498 126,499 120,392 149,394" alt="正面-右小腿"
+                        onclick="selectInjury('正面-右小腿')">
+                    <area class="body-part" shape="polygon" coords="117,547 142,555 148,501 122,499" alt="正面-右腳背/腳趾"
+                        onclick="selectInjury('正面-右腳背/腳趾')">
+                    <area class="body-part" shape="polygon" coords="159,314 199,314 196,394 166,394" alt="正面-左大腿"
+                        onclick="selectInjury('正面-左大腿')">
+                    <area class="body-part" shape="polygon" coords="168,494 164,396 196,397 188,497" alt="正面-左小腿"
+                        onclick="selectInjury('正面-左小腿')">
+                    <area class="body-part" shape="polygon" coords="172,555 197,549 188,499 165,495 164,535"
+                        alt="正面-左腳背/腳趾" onclick="selectInjury('正面-左腳背/腳趾')">
+                    <area class="body-part" shape="polygon" coords="200,151 231,222 213,230 199,208" alt="正面-左大臂"
+                        onclick="selectInjury('正面-左大臂')">
+                    <area class="body-part" shape="polygon" coords="254,285 244,293 213,232 232,223" alt="正面-左小臂"
+                        onclick="selectInjury('正面-左小臂')">
                     <area class="body-part" shape="polygon"
-                        coords="172,553 198,547 190,497 194,384 200,308 158,310 164,417 164,536" alt="正面-左腿"
-                        onclick="selectInjury('正面-左腿')">
-                    <area class="body-part" shape="polygon"
-                        coords="204,152 254,278 285,298 280,328 256,335 244,328 239,292 201,210" alt="正面-左手"
-                        onclick="selectInjury('正面-左手')">
-                    <area class="body-part" shape="polygon"
-                        coords="112,152 68,257 60,283 30,294 49,299 33,325 46,336 71,332 74,297 98,252 113,215"
-                        alt="正面-右手" onclick="selectInjury('正面-右手')">
+                        coords="245,328 257,332 269,333 279,324 284,295 258,284 243,297" alt="正面-左手指/手掌"
+                        onclick="selectInjury('正面-左手指/手掌')">
+                    <area class="body-part" shape="polygon" coords="110,152 81,218 104,233 117,208" alt="正面-右大臂"
+                        onclick="selectInjury('正面-右大臂')">
+                    <area class="body-part" shape="polygon" coords="57,284 83,223 101,234 73,291" alt="正面-右小臂"
+                        onclick="selectInjury('正面-右小臂')">
+                    <area class="body-part" shape="polygon" coords="33,325 48,334 58,332 68,330 72,291 56,283 33,293"
+                        alt="正面-右手指/手掌" onclick="selectInjury('正面-右手指/手掌')">
+
                     <!-- 背面 -->
-                    <area class="body-part" shape="circle" coords="444,91,38" alt="頭部" onclick="selectInjury('頭部')">
+                    <area class="body-part" shape="circle" coords="444,91,38" alt="後腦杓" onclick="selectInjury('後腦杓')">
                     <area class="body-part" shape="rect" coords="428,128,459,142" alt="後頸" onclick="selectInjury('後頸')">
-                    <area class="body-part" shape="polygon" coords="400,144 409,231 402,269 489,271 479,231 489,144" alt="背部" onclick="selectInjury('背部')">
-                                        <area class="body-part" shape="rect" coords="399,270,490,312" alt="屁股" onclick="selectInjury('屁股')">
-                    <area class="body-part" shape="polygon" coords="447,314 458,390 458,491 453,554 488,554 478,486 489,314"
-                        alt="背面-右腿" onclick="selectInjury('背面-右腿')">
+                    <area class="body-part" shape="polygon" coords="400,144 409,231 402,269 489,271 479,231 489,144"
+                        alt="背部" onclick="selectInjury('背部')">
+                    <area class="body-part" shape="rect" coords="399,270,490,312" alt="屁股" onclick="selectInjury('屁股')">
+                    <area class="body-part" shape="polygon" coords="448,313 490,314 485,393 455,394" alt="背面-右大腿"
+                        onclick="selectInjury('背面-右大腿')">
+                    <area class="body-part" shape="polygon" coords="479,487 460,485 455,394 485,395" alt="背面-右小腿"
+                        onclick="selectInjury('背面-右小腿')">
+                    <area class="body-part" shape="polygon" coords="453,554 486,551 477,489 461,487" alt="背面-右腳掌/腳趾"
+                        onclick="selectInjury('背面-右腳掌/腳趾')">
+                    <area class="body-part" shape="polygon" coords="401,312 438,315 433,394 404,396" alt="背面-左大腿"
+                        onclick="selectInjury('背面-左大腿')">
+                    <area class="body-part" shape="polygon" coords="403,402 404,398 434,398 429,486 409,484"
+                        alt="背面-左小腿" onclick="selectInjury('背面-左小腿')">
+                    <area class="body-part" shape="polygon" coords="432,556 404,549 410,488 429,490 435,540"
+                        alt="背面-左腳掌/腳趾" onclick="selectInjury('背面-左腳掌/腳趾')">
+                    <area class="body-part" shape="polygon" coords="397,150 387,154 367,221 385,235 400,195"
+                        alt="背面-左大臂" onclick="selectInjury('背面-左大臂')">
+                    <area class="body-part" shape="polygon" coords="353,291 342,286 366,224 385,236" alt="背面-左小臂"
+                        onclick="selectInjury('背面-左小臂')">
                     <area class="body-part" shape="polygon"
-                        coords="435,552 404,548 408,486 398,316 439,316" alt="背面-左腿"
-                        onclick="selectInjury('背面-左腿')">
-                    <area class="body-part" shape="polygon"
-                        coords="397,150 385,160 360,236 342,286 316,294 332,300 315,321 329,332 352,330 355,294 401,200 " alt="背面-左手"
-                        onclick="selectInjury('背面-左手')">
-                    <area class="body-part" shape="polygon"
-                        coords="489,150 502,157 545,287 574,296 560,302 572,322 560,335 539,332 531,291 486,197"
-                        alt="背面-右手" onclick="selectInjury('背面-右手')">
+                        coords="352,329 340,332 326,331 315,319 315,293 340,287 354,293" alt="正面-左手指/手背"
+                        onclick="selectInjury('背面-左手指/手背')">
+                    <area class="body-part" shape="polygon" coords="487,148 500,157 521,221 505,236 487,198"
+                        alt="背面-右大臂" onclick="selectInjury('背面-右大臂')">
+                    <area class="body-part" shape="polygon" coords="534,296 547,287 521,225 506,237" alt="背面-右小臂"
+                        onclick="selectInjury('背面-右小臂')">
+                    <area class="body-part" shape="polygon" coords="535,296 546,288 573,296 571,322 548,334 537,331"
+                        alt="背面-右手指/手背" onclick="selectInjury('背面-右手指/手背')">
                 </map>
             </div>
             <div class="col-lg-6">
-                <h2>已選擇的受傷部位：</h2>
+                <h2>已選擇的受傷部位：
+                    <button type="button" class="btn btn-warning" onclick="showJointModal()">添加關節部位</button>
+                </h2>
+                <div class="modal fade" id="jointModal" tabindex="-1" aria-labelledby="jointModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="jointModalLabel">選擇關節部位</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="jointArea" class="form-label">選擇關節部位</label>
+                                    <select id="jointArea" class="form-select">
+                                        <option value="">請選擇關節部位</option>
+                                        <option value="左手肘">左手肘</option>
+                                        <option value="右手肘">右手肘</option>
+                                        <option value="左膝蓋">左膝蓋</option>
+                                        <option value="右膝蓋">右膝蓋</option>
+                                        <option value="左腳踝">左腳踝</option>
+                                        <option value="右腳踝">右腳踝</option>
+                                        <option value="左手腕">左手腕</option>
+                                        <option value="右手腕">右手腕</option>
+                                        <!-- 其他關節部位 -->
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="jointType" class="form-label">選擇傷勢</label>
+                                    <select class="form-select" id="jointType">
+                                        <option value="請選擇傷勢">請選擇傷勢</option>
+                                        <option value="擦傷">擦傷</option>
+                                        <option value="挫傷">挫傷</option>
+                                        <option value="撕裂傷">撕裂傷</option>
+                                        <option value="燙傷">燙傷</option>
+                                        <option value="割傷">割傷</option>
+                                        <option value="拉傷">拉傷</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                                <button type="button" class="btn btn-primary" onclick="addJointInjury()">確定</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <ul class="list-group injury-list" id="injury-list"></ul>
-
+                <button type="button" class="btn btn-primary" onclick="showData()" style="width: 100%;">產出簡易報告</button>
             </div>
-
         </div>
-        <button type="button" class="btn btn-primary" onclick="showData()">Show Data</button>
-
     </div>
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="text-center">
+        <span class="text-muted">Copyright &copy; 2024 UaenaXiang. All rights reserved.</span>
+    </div>
+</footer>
 
 
     <script src="js/emt.js"></script>

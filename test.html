@@ -1,0 +1,34 @@
+<area class="body-part" shape="circle" coords="159,90,39" alt="頭部" onclick="openInjuryModal()">
+<div class="modal fade" id="injuryModal" tabindex="-1" aria-labelledby="injuryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="injuryModalLabel">選擇受傷部位</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select class="form-select" id="injuredArea">
+                    <option value="頭皮">頭皮</option>
+                    <option value="眼">眼</option>
+                    <option value="耳">耳</option>
+                    <option value="鼻">鼻</option>
+                    <option value="口">口</option>
+                    <option value="額">額</option>
+                    <option value="頰">頰</option>
+                </select>
+                <select class="form-select" id="injuryType">
+                    <option value="請選擇傷勢">請選擇傷勢</option>
+                    <option value="撕裂傷">撕裂傷</option>
+                    <option value="挫傷">挫傷</option>
+                    <option value="擦傷">擦傷</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary" onclick="addInjury()">確定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<area class="body-part" shape="polygon" coords="116,307 154,312 149,393 120,391" alt="正面-右腿"
+    onclick="selectInjury('正面-右腿')">
