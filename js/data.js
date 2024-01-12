@@ -11,22 +11,37 @@ function showData() {
         selectedInjuries: selectedInjuries.map(item => `${item.bodyPart}: ${item.injury}`)
     };
 
+    const modalTitle = document.getElementById('dataModalLabel');
     const modalBody = document.getElementById('modalBody');
     let heartRateContent = `<p><strong>心跳：</strong> ${formData.heartRate ? formData.heartRate + ' bpm' : '未測量'}</p>`;
+    let isHeartRateCritical = false;
 
     if (formData.heartRate && (formData.heartRate < 20 || formData.heartRate > 150 || (formData.heartRate < 50 && formData.heartRate > 0))) {
-        heartRateContent = `<p><strong>心跳：</strong> <span style="color: red;">${formData.heartRate} bpm（危及個案！）</span></p>`;
+        heartRateContent = `<p><strong>心跳：</strong> <span style="color: red;">${formData.heartRate} bpm（危急個案！）</span></p>`;
+        isHeartRateCritical = true;
     }
+
     let bloodPressureContent = `<p><strong>血壓：</strong> ${formData.bloodPressure ? formData.bloodPressure + ' mmHg' : '未測量'}</p>`;
+    let isBloodPressureCritical = false;
 
     if (formData.bloodPressure && (formData.bloodPressure > 200 || formData.bloodPressure < 90)) {
-        bloodPressureContent = `<p><strong>血壓：</strong> <span style="color: red;">${formData.bloodPressure} mmHg（危及個案！）</span></p>`;
+        bloodPressureContent = `<p><strong>血壓：</strong> <span style="color: red;">${formData.bloodPressure} mmHg（危急個案！）</span></p>`;
+        isBloodPressureCritical = true;
     }
+
     let bloodOxygenContent = `<p><strong>血氧：</strong> ${formData.bloodOxygen ? formData.bloodOxygen + ' %' : '未測量'}</p>`;
+    let isBloodOxygenCritical = false;
 
     if (formData.bloodOxygen && formData.bloodOxygen < 90) {
-        bloodOxygenContent = `<p><strong>血氧：</strong> <span style="color: red;">${formData.bloodOxygen} %（危及個案！）</span></p>`;
+        bloodOxygenContent = `<p><strong>血氧：</strong> <span style="color: red;">${formData.bloodOxygen} %（危急個案！）</span></p>`;
+        isBloodOxygenCritical = true;
     }
+
+    modalTitle.innerHTML = `<strong style="color: white; width: 100%;" class="text-center">簡易報告${isHeartRateCritical || isBloodPressureCritical || isBloodOxygenCritical ? ' - 危急個案' : ''}</strong>`;
+    modalTitle.style.backgroundColor = isHeartRateCritical || isBloodPressureCritical || isBloodOxygenCritical ? 'red' : 'green';
+
+
+
 
     modalBody.innerHTML = `
     <p><strong>外表特徵：</strong> ${formData.physicalAppearance || '未填寫'}</p>
@@ -41,7 +56,7 @@ function showData() {
     <ul>
         ${formData.selectedInjuries.length > 0 ? formData.selectedInjuries.map(injury => `<li>${injury}</li>`).join('') : '未填寫'}
     </ul>
-`;
+    `;
 
     const modal = new bootstrap.Modal(document.getElementById('dataModal'));
     modal.show();

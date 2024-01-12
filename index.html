@@ -13,8 +13,8 @@
     <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="dataModalLabel">簡易報告</h5>
+                <div class="modal-header" style="width: 100%;">
+                    <h5 class="modal-title" id="dataModalLabel" style="width: 100%; text-align: center;"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="modalBody">
@@ -163,15 +163,24 @@
                                     <div class="mb-3">
                                         <label for="injuryType" class="form-label">選擇傷勢</label>
                                         <select class="form-select" id="injuryType">
-                                            <option value="請選擇傷勢">請選擇傷勢</option>
-                                            <option value="擦傷">擦傷</option>
-                                            <option value="挫傷">挫傷</option>
-                                            <option value="撕裂傷">撕裂傷</option>
-                                            <option value="燙傷">燙傷</option>
-                                            <option value="割傷">割傷</option>
-                                            <option value="拉傷">拉傷</option>
+                                            <optgroup label="一般傷勢">
+                                                <option value="請選擇傷勢">請選擇傷勢</option>
+                                                <option value="擦傷">擦傷</option>
+                                                <option value="挫傷">挫傷</option>
+                                                <option value="撕裂傷">撕裂傷</option>
+                                                <option value="燙傷">燙傷</option>
+                                                <option value="割傷">割傷</option>
+                                                <option value="扭傷">扭傷</option>
+                                                <option value="拉傷">拉傷</option>
+                                            </optgroup>
+                                            <optgroup label="槍傷">
+                                                <option value="槍傷(子彈擦傷)">槍傷(子彈擦傷)</option>
+                                                <option value="槍傷(子彈貫穿)">槍傷(子彈貫穿)</option>
+                                                <option value="槍傷(子彈嵌入)">槍傷(子彈嵌入)</option>
+                                            </optgroup>
                                         </select>
                                     </div>
+
                                 </div>
 
                                 <div class="modal-footer">
@@ -277,15 +286,25 @@
                                 <div class="mb-3">
                                     <label for="jointType" class="form-label">選擇傷勢</label>
                                     <select class="form-select" id="jointType">
-                                        <option value="請選擇傷勢">請選擇傷勢</option>
-                                        <option value="擦傷">擦傷</option>
-                                        <option value="挫傷">挫傷</option>
-                                        <option value="撕裂傷">撕裂傷</option>
-                                        <option value="燙傷">燙傷</option>
-                                        <option value="割傷">割傷</option>
-                                        <option value="拉傷">拉傷</option>
+                                        <optgroup label="一般傷勢">
+                                                <option value="請選擇傷勢">請選擇傷勢</option>
+                                                <option value="擦傷">擦傷</option>
+                                                <option value="挫傷">挫傷</option>
+                                                <option value="撕裂傷">撕裂傷</option>
+                                                <option value="燙傷">燙傷</option>
+                                                <option value="割傷">割傷</option>
+                                                <option value="扭傷">扭傷</option>
+                                                <option value="拉傷">拉傷</option>
+                                        </optgroup>
+                                        <optgroup label="槍傷">
+                                            <option value="槍傷(子彈擦傷)">槍傷(子彈擦傷)</option>
+                                            <option value="槍傷(子彈貫穿)">槍傷(子彈貫穿)</option>
+                                            <option value="槍傷(子彈嵌入)">槍傷(子彈嵌入)</option>
+                                        </optgroup>
+                                        <!-- Add more categories and options as needed -->
                                     </select>
                                 </div>
+
                             </div>
 
                             <div class="modal-footer">
@@ -306,8 +325,6 @@
         <span class="text-muted">Copyright &copy; 2024 UaenaXiang. All rights reserved.</span>
     </div>
 </footer>
-
-
     <script src="js/emt.js"></script>
     <script src="js/data.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

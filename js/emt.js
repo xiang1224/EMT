@@ -1,16 +1,27 @@
 let selectedInjuries = []; // 将 selectedInjuries 定义为数组而不是对象
 
+const injuryOptions = [
+    { category: '一般傷勢', options: ['請選擇傷勢', '擦傷', '挫傷', '撕裂傷', '燙傷', '割傷', '扭傷', '拉傷'] },
+    { category: '槍傷', options: ['槍傷(子彈擦傷)', '槍傷(子彈貫穿)', '槍傷(子彈嵌入)'] },
+    // 可以根據需要添加更多分類和傷勢選項
+];
+
 function selectInjury(bodyPart) {
     const selectBox = document.createElement('select');
     selectBox.className = 'form-select';
 
-    const injuryOptions = ['請選擇傷勢', '擦傷', '挫傷', '撕裂傷', '燙傷', '割傷', '拉傷']; // 受傷選項
+    injuryOptions.forEach(category => {
+        const optgroup = document.createElement('optgroup');
+        optgroup.label = category.category;
 
-    injuryOptions.forEach(option => {
-        const optionElement = document.createElement('option');
-        optionElement.value = option;
-        optionElement.textContent = option;
-        selectBox.appendChild(optionElement);
+        category.options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            optgroup.appendChild(optionElement);
+        });
+
+        selectBox.appendChild(optgroup);
     });
 
     selectBox.addEventListener('change', function () {
@@ -24,6 +35,7 @@ function selectInjury(bodyPart) {
 
     document.getElementById('injury-list').appendChild(selectBox);
 }
+
 // 打開彈出視窗函數
 function openHeadInjuryModal() {
     const modal = new bootstrap.Modal(document.getElementById('HeadinjuryModal'));
@@ -44,11 +56,10 @@ function addInjury() {
 }
 
 // 關閉彈出視窗函數
-function closeInjuryModal() {
+function closeHeadInjuryModal() {
     const modal = bootstrap.Modal.getInstance(document.getElementById('HeadinjuryModal'));
     modal.hide();
 }
-
 
 
 function showJointModal() {
@@ -64,12 +75,13 @@ function addJointInjury() {
         const injury = { bodyPart: selectedArea, injury: selectedInjury };
         selectedInjuries.push(injury);
         updateInjuryList();
-        closeInjuryModal(); // 關閉彈出視窗
+        closeJointInjuryModal(); // 關閉彈出視窗
     }
 }
 
+
 // 關閉彈出視窗函數
-function closeInjuryModal() {
+function closeJointInjuryModal() {
     const modal = bootstrap.Modal.getInstance(document.getElementById('jointModal'));
     modal.hide();
 }
