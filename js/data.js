@@ -56,6 +56,22 @@ function showData() {
     <ul>
         ${formData.selectedInjuries.length > 0 ? formData.selectedInjuries.map(injury => `<li>${injury}</li>`).join('') : '未填寫'}
     </ul>
+    <div class="mb-3" style="display: flex; align-items: center;">
+        <strong for="responsiblePerson1" class="form-label" style="white-space: nowrap; margin-right: 5px; margin-bottom: 0px;">負責人員1：</strong>
+        <select class="form-select" id="responsiblePerson1">
+            <option value="" selected>請選擇負責人員</option>
+            <option value="option1">凱文．諾瓦克</option>
+            <option value="option2">秋刀魚先生</option>
+        </select>
+    </div>
+    <div class="mb-3" style="display: flex; align-items: center;">
+        <strong for="responsiblePerson2" class="form-label" style="white-space: nowrap; margin-right: 5px; margin-bottom: 0px;">負責人員2：</strong>
+        <select class="form-select" id="responsiblePerson2">
+            <option value="" selected>請選擇負責人員</option>
+            <option value="option1">凱文．諾瓦克</option>
+            <option value="option2">秋刀魚先生</option>
+        </select>
+    </div>
     `;
 
     const modal = new bootstrap.Modal(document.getElementById('dataModal'));
